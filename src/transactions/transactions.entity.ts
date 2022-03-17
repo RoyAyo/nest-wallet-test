@@ -20,6 +20,9 @@ export class Transactions {
   @Column()
   amount: number;
 
+  @Column({ type: 'text' })
+  description: string;
+
   @CreateDateColumn({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP(6)',

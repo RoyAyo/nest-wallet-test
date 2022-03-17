@@ -1,0 +1,9 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "mac",
+    "password": "mac",
+    "database": "lazer-test",
+    "entities": ["dist/**/*.entity{.ts,.js}"]
+ }

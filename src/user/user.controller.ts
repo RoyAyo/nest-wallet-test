@@ -1,31 +1,50 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  ValidationPipe as NestValidationPipe,
+  UsePipes,
+  Body,
+} from '@nestjs/common';
+import { ValidationPipe } from 'src/common/pipes/validation.pipe';
+import { LoginUserDto, RegisterUserDto } from './dtos/user.dto';
+import { User } from './user.entity';
 import { UserService } from './user.service';
+import { RegisterUserValidation, LoginUserValidation } from './user.validation';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @UsePipes(
+    new ValidationPipe(RegisterUserValidation),
+    new NestValidationPipe({ transform: true }),
+  )
   @Post('/register')
-  async registerUser() {
-    await this.userService.getCurrentUser();
+  async registerUser(@Body() payload: RegisterUserDto) {
+    const data = await this.userService.registerUser(payload);
     return {
-      message: 'Nice work',
+      message: 'User created successfully',
+      data,
     };
   }
 
+  @UsePipes(
+    new ValidationPipe(LoginUserValidation),
+    new NestValidationPipe({ transform: true }),
+  )
   @Post('/login')
-  async loginUser() {
-    await this.userService.getCurrentUser();
+  async loginUser(@Body() payload: LoginUserDto) {
+    const data = await this.userService.loginUser(payload);
     return {
-      message: 'Nice work',
+      data,
     };
   }
 
-  @Get('/')
-  async getCurrentUser() {
-    await this.userService.getCurrentUser();
+  @Get('/me')
+  async getCurrentUser(@Body('user') user: User) {
     return {
-      message: 'Nice work',
+      data: user,
     };
   }
 }

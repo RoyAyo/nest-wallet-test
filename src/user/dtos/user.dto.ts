@@ -4,6 +4,10 @@ export class RegisterUserDto {
   email: string;
 
   password: string;
+
+  phone: string;
+
+  username: string;
 }
 
 export class LoginUserDto {
