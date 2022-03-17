@@ -12,7 +12,10 @@ export class Transactions {
   id: number;
 
   @Column()
-  userId: number;
+  senderId: number;
+
+  @Column()
+  receiverId: number;
 
   @Column()
   amount: number;

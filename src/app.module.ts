@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { AppConfigModule } from './config/app/app.module';
 import { ConfigModule } from './config/config.module';
+import { WalletModule } from './wallet/wallet.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ConfigModule } from './config/config.module';
     TransactionsModule,
     AppConfigModule,
     ConfigModule,
+    WalletModule,
   ],
   controllers: [AppController],
   providers: [AppService],

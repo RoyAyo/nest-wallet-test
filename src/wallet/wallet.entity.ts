@@ -7,27 +7,15 @@ import {
 } from 'typeorm';
 
 @Entity()
-export class User {
+export class Wallet {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  fullName: string;
-
-  @Column({ type: 'varchar', length: 50, unique: true })
-  email: string;
-
-  @Column({ type: 'varchar', length: 50, unique: true })
-  username: string;
-
-  @Column({ type: 'varchar', length: 20, unique: true })
-  phone: string;
+  userId: number;
 
   @Column()
-  password: string;
-
-  @Column()
-  balance: number;
+  amount: number;
 
   @CreateDateColumn({
     type: 'timestamp',

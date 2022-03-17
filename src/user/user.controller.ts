@@ -5,7 +5,7 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post('/')
+  @Post('/register')
   async registerUser() {
     await this.userService.getCurrentUser();
     return {
@@ -13,7 +13,7 @@ export class UserController {
     };
   }
 
-  @Post('/')
+  @Post('/login')
   async loginUser() {
     await this.userService.getCurrentUser();
     return {
