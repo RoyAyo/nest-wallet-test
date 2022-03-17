@@ -17,8 +17,16 @@ export class TransactionsService {
     private connection: Connection,
   ) {}
 
-  depositMoney(user: any) {
-    console.log(user);
+  async depositMoney(payload: any) {
+    const { user, amount } = payload;
+    await this.userRepo.update(
+      {
+        id: user.id,
+      },
+      {
+        balance: () => `balance + ${amount}`,
+      },
+    );
     //update user balance
   }
 
@@ -69,7 +77,6 @@ export class TransactionsService {
         amount,
         description: 'Money sent successfully',
       };
-      console.log(data);
       const transaction = queryRunner.manager.create(Transactions, data);
       await queryRunner.manager.save(transaction);
 
