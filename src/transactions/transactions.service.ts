@@ -1,10 +1,11 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { HelperService } from '../helper/helper.service';
+// import { HelperService } from '../helper/helper.service';
 import { User } from '../user/user.entity';
 import { Connection, Repository } from 'typeorm';
 import { sendMoneyDTO } from './dtos/transactions.dto';
 import { Transactions } from './transactions.entity';
+import { MailService } from '../mail/mail.service';
 
 @Injectable()
 export class TransactionsService {
@@ -13,9 +14,20 @@ export class TransactionsService {
     private readonly transactionRepo: Repository<Transactions>,
     @InjectRepository(User)
     private readonly userRepo: Repository<User>,
-    private readonly helpersService: HelperService,
+    // private readonly helpersService: HelperService,
     private connection: Connection,
+    private readonly mailService: MailService,
   ) {}
+
+  private async moneySentMails(sender: User, receiver: User, amount: number) {
+    const messageToSender = `$${amount} has been successfully sent to ${receiver.fullName}`;
+    const messageToReciever = `${sender.fullName} has sent you $${amount}`;
+    await this.mailService.moneySentConfirmation(sender.email, messageToSender);
+    await this.mailService.moneySentConfirmation(
+      receiver.email,
+      messageToReciever,
+    );
+  }
 
   async depositMoney(payload: any) {
     const { user, amount } = payload;
@@ -81,12 +93,12 @@ export class TransactionsService {
       await queryRunner.manager.save(transaction);
 
       await queryRunner.commitTransaction();
+      this.moneySentMails(user, referenceUser, amount);
     } catch (err) {
       await queryRunner.rollbackTransaction();
       console.log(err);
     } finally {
       await queryRunner.release();
     }
-    //create new wallet + for user and - for reference user
   }
 }

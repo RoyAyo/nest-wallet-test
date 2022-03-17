@@ -28,9 +28,9 @@ export class TransactionsController {
   )
   @Post('/')
   async sendMoney(@Body() payload: sendMoneyDTO) {
-    const message = await this.transactionsService.sendMoney(payload);
+    await this.transactionsService.sendMoney(payload);
     return {
-      data: message,
+      message: 'Funds successfully sent',
     };
   }
 }

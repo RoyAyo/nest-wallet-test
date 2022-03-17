@@ -7,6 +7,7 @@ import { Transactions } from './transactions.entity';
 // import { WalletModule } from 'src/wallet/wallet.module';
 import { HelperModule } from '../helper/helper.module';
 import { HelperService } from '../helper/helper.service';
+import { MailModule } from '../mail/mail.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { HelperService } from '../helper/helper.service';
     // WalletModule,
     HelperModule,
     TypeOrmModule.forFeature([Transactions]),
+    MailModule,
   ],
   controllers: [TransactionsController],
   providers: [TransactionsService, HelperService],
