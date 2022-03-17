@@ -6,7 +6,7 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { NextFunction, Request, Response } from 'express';
-import { HelperService } from 'src/helper/helper.service';
+import { HelperService } from '../helper/helper.service';
 import { User } from './user.entity';
 
 @Injectable()

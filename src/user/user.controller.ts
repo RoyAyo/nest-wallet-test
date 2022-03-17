@@ -6,7 +6,7 @@ import {
   UsePipes,
   Body,
 } from '@nestjs/common';
-import { ValidationPipe } from 'src/common/pipes/validation.pipe';
+import { ValidationPipe } from '../common/pipes/validation.pipe';
 import { LoginUserDto, RegisterUserDto } from './dtos/user.dto';
 import { User } from './user.entity';
 import { UserService } from './user.service';

@@ -15,4 +15,10 @@ describe('HelperService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  describe('hashPassword', () => {
+    it('should return a hashpassword that passes bcrypt check', () => {
+      expect(service.hashPassword('1234')).toBeDefined();
+    });
+  });
 });

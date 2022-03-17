@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Transactions } from 'src/transactions/transactions.entity';
-import { Wallet } from 'src/wallet/wallet.entity';
+import { Transactions } from '../transactions/transactions.entity';
+import { Wallet } from '../wallet/wallet.entity';
 import { User } from '../user/user.entity';
 
 @Module({
@@ -15,7 +15,10 @@ import { User } from '../user/user.entity';
         port: 5432,
         username: process.env.DATABASE_USERNAME ?? 'mac',
         password: process.env.DATABASE_PASSWORD ?? 'mac',
-        database: process.env.DATABASE ?? 'lazer-test',
+        database:
+          process.env.NODE_ENV === 'test'
+            ? process.env.DATABASE_TEST
+            : process.env.DATABASE ?? 'lazer-test',
         entities: [User, Transactions, Wallet],
         synchronize: process.env.NODE_ENV !== 'production',
       }),

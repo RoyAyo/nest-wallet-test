@@ -6,7 +6,7 @@ import {
   ValidationPipe as NestValidationPipe,
   Body,
 } from '@nestjs/common';
-import { ValidationPipe } from 'src/common/pipes/validation.pipe';
+import { ValidationPipe } from '../common/pipes/validation.pipe';
 import { sendMoneyDTO } from './dtos/transactions.dto';
 import { TransactionsService } from './transactions.service';
 import { SendMoneyValidation } from './transactions.valitation';

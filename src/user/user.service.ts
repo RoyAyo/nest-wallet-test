@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { HelperService } from 'src/helper/helper.service';
+import { HelperService } from '../helper/helper.service';
 import { Repository } from 'typeorm';
 import { LoginUserDto, RegisterUserDto } from './dtos/user.dto';
 import { User } from './user.entity';
