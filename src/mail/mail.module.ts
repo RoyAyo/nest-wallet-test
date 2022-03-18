@@ -12,8 +12,8 @@ import { MailService } from './mail.service';
           host: 'smtp.gmail.com',
           secure: false,
           auth: {
-            user: 'roytest791@gmail.com',
-            pass: 'testing-123',
+            user: process.env.MAIL_USERNAME ?? 'roytest791@gmail.com',
+            pass: process.env.MAIL_PASSWORD ?? 'testing-123',
           },
         },
       }),
