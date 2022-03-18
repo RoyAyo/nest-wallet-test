@@ -39,7 +39,6 @@ export class TransactionsService {
         balance: () => `balance + ${amount}`,
       },
     );
-    //update user balance
   }
 
   async sendMoney(payload: sendMoneyDTO) {

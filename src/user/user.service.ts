@@ -54,7 +54,7 @@ export class UserService {
     };
   }
 
-  async getCurrentUser() {
-    console.log(1);
+  async whatever() {
+    return 1;
   }
 }

@@ -6,11 +6,10 @@ export class MailService {
   constructor(private mailerService: MailerService) {}
 
   async moneySentConfirmation(email: string, content: string) {
-    const m = await this.mailerService.sendMail({
+    await this.mailerService.sendMail({
       to: email,
       subject: 'Test App',
       text: content,
     });
-    console.log(m);
   }
 }

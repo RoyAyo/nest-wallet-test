@@ -5,7 +5,7 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class HelperService {
   SALT_ROUNDS = 10;
-  JWT_TOKEN = process.env.JWT_TOKEN;
+  JWT_TOKEN = process.env.JWT_TOKEN ?? '1234';
 
   hashPassword(password: string): string {
     const hashedPassword = bcrypt.hashSync(password, this.SALT_ROUNDS);
