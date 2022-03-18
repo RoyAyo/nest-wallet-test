@@ -8,5 +8,5 @@ export const SendMoneyValidation = Joi.object().keys({
 
 export const DepositMoneyValidation = Joi.object().keys({
   user: Joi.any().required(),
-  amount: Joi.number().required(),
+  amount: Joi.number().positive().required(),
 });
