@@ -33,6 +33,7 @@ export class UserMiddleware implements NestMiddleware {
       const user = await this.userRepo.findOne({ id: payload.id });
       if (!user)
         throw new UnauthorizedException({ message: 'You need to login first' });
+      delete user.password;
       req.body.user = user;
       next();
     } catch (error) {
