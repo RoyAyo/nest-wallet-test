@@ -5,3 +5,8 @@ export const SendMoneyValidation = Joi.object().keys({
   amount: Joi.number().required(),
   user: Joi.any().required(),
 });
+
+export const DepositMoneyValidation = Joi.object().keys({
+  user: Joi.any().required(),
+  amount: Joi.number().required(),
+});

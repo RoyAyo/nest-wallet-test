@@ -6,7 +6,6 @@ export interface IAuthUser {
   _id: string;
   id?: string;
   name: string;
-  slug: string;
 }
 export interface IErrorHandlerInterface {
   data?: IObjectInterface;

@@ -20,6 +20,7 @@ import { User } from '../user/user.entity';
             : process.env.DATABASE ?? 'lazer-test',
         entities: [User, Transactions],
         synchronize: process.env.NODE_ENV !== 'production',
+        keepConnectionAlive: true,
       }),
     }),
   ],

@@ -5,6 +5,7 @@ import {
   ValidationPipe as NestValidationPipe,
   UsePipes,
   Body,
+  HttpCode,
 } from '@nestjs/common';
 import { ValidationPipe } from '../common/pipes/validation.pipe';
 import { LoginUserDto, RegisterUserDto } from './dtos/user.dto';
@@ -34,6 +35,7 @@ export class UserController {
     new NestValidationPipe({ transform: true }),
   )
   @Post('/login')
+  @HttpCode(200)
   async loginUser(@Body() payload: LoginUserDto) {
     const data = await this.userService.loginUser(payload);
     return {

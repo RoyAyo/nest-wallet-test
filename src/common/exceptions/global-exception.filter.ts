@@ -6,6 +6,7 @@ import {
   HttpException,
   HttpStatus,
   Logger,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
@@ -37,6 +38,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       case HttpException:
       case UnauthorizedException:
       case BadRequestException:
+      case NotFoundException:
         status = (exception as HttpException).getStatus();
         error = (exception as any).getResponse().error;
         break;
