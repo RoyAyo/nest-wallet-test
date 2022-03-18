@@ -6,7 +6,6 @@ import { User } from '../user/user.entity';
 import { Connection, QueryRunner, Repository } from 'typeorm';
 import { MailService } from '../mail/mail.service';
 import { MailModule } from '../mail/mail.module';
-import { sendMoneyDTO } from './dtos/transactions.dto';
 
 const userData = {
   id: 1,
@@ -31,7 +30,7 @@ describe('TransactionsService', () => {
   } as QueryRunner;
 
   class ConnectionMock {
-    createQueryRunner(mode?: 'master' | 'slave'): QueryRunner {
+    createQueryRunner(): QueryRunner {
       return qr;
     }
   }
@@ -100,29 +99,5 @@ describe('TransactionsService', () => {
 
   it('user Repository be defined', () => {
     expect(userRepository).toBeDefined();
-  });
-
-  describe('sendMoney', () => {
-    const qr = connection.createQueryRunner();
-    jest.spyOn(qr.manager, 'update').mockImplementation();
-    jest.spyOn(qr.manager, 'create').mockImplementation();
-    jest.spyOn(qr.manager, 'save').mockImplementation();
-    it('should call the userRepo.findOne with appropriate data', async () => {
-      const data: sendMoneyDTO = {
-        user: userData,
-        amount: 1000,
-        reference: 'roy',
-      };
-      await service.sendMoney(data);
-      expect(userRepository.findOne).toHaveBeenCalledWith(1);
-    });
-
-    it('should fail if user.id is reference.id', () => {});
-
-    it('should fail if balance is less than provided amount', () => {});
-
-    it('should call the connection transaction query builder', () => {
-      // jest.spyOn(connection.createQueryBuilder,'')
-    });
   });
 });
